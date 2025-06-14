@@ -114,7 +114,11 @@ def main():
                     result_lines.append(f"{action}{fmt_num(abs(net))}元")
 
     # Render result box regardless of input completeness
-    full_output = "\n".join(result_lines)
+    if not result_lines:
+        full_output = f"{today_str}，无下注"
+    else:
+        full_output = "\n".join(result_lines)
+
 
     st.markdown("""
     <style>
