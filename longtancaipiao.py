@@ -158,7 +158,8 @@ def main():
     """, unsafe_allow_html=True)
     
     st.markdown(f"<div class='green-box'>{full_output}</div>", unsafe_allow_html=True)
-    
+
+    st.markdown("### 📋 结算结果（可复制）")
     # Code box with built-in copy button
     st.code(full_output, language="text")
 
