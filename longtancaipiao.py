@@ -116,26 +116,50 @@ def main():
     # Render result box regardless of input completeness
     full_output = "\n".join(result_lines)
 
+    st.markdown("""
+    <style>
+        .green-box {
+            background-color: #e6ffe6;
+            border-left: 5px solid #33cc33;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 10px;
+            white-space: pre-wrap;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .copy-btn {
+            background-color: #33cc33;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
     # Green box result
-st.markdown("""
-<style>
-.green-box {
-    background-color: #e6ffe6;
-    border-left: 5px solid #33cc33;
-    padding: 15px;
-    margin-top: 20px;
-    border-radius: 10px;
-    white-space: pre-wrap;
-    font-size: 16px;
-    line-height: 1.6;
-}
-</style>
-""", unsafe_allow_html=True)
-
-st.markdown(f"<div class='green-box'>{full_output}</div>", unsafe_allow_html=True)
-
-# Simple textarea for copying
-st.text_area("📋 结算结果（可复制）", value=full_output, height=150)
+    st.markdown("""
+    <style>
+    .green-box {
+        background-color: #e6ffe6;
+        border-left: 5px solid #33cc33;
+        padding: 15px;
+        margin-top: 20px;
+        border-radius: 10px;
+        white-space: pre-wrap;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    st.markdown(f"<div class='green-box'>{full_output}</div>", unsafe_allow_html=True)
+    
+    # Simple textarea for copying
+    st.text_area("📋 结算结果（可复制）", value=full_output, height=150)
 
 
 if __name__ == "__main__":
