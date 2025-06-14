@@ -140,7 +140,7 @@ def main():
     </style>
     """, unsafe_allow_html=True)
 
-    # Green box result
+    # Green result box (visual only)
     st.markdown("""
     <style>
     .green-box {
@@ -150,6 +150,7 @@ def main():
         margin-top: 20px;
         border-radius: 10px;
         white-space: pre-wrap;
+        font-family: monospace;
         font-size: 16px;
         line-height: 1.6;
     }
@@ -158,8 +159,9 @@ def main():
     
     st.markdown(f"<div class='green-box'>{full_output}</div>", unsafe_allow_html=True)
     
-    # Simple textarea for copying
-    st.text_area("📋 结算结果（可复制）", value=full_output, height=150)
+    # Code box with built-in copy button
+    st.code(full_output, language="text")
+
 
 
 if __name__ == "__main__":
