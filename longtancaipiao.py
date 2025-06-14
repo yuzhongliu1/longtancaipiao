@@ -135,7 +135,7 @@ def main():
     # Streamlit 本身不支持直接复制按钮，这里用st.text_area + st.button实现复制提示
     copied = False
     if st.button("复制结算结果"):
-        st.experimental_set_query_params()  # 小技巧刷新一下避免重复点击
+        st.params()  # 小技巧刷新一下避免重复点击
         st.code(result_text)  # 显示代码块供手动复制
         st.info("请手动选中上面内容，Ctrl+C 复制")
         copied = True
