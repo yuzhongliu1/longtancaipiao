@@ -211,7 +211,10 @@ def main():
 
     # 输出结果代码框，方便复制
     st.markdown("<h4>结算结果可在下方复制</h4>", unsafe_allow_html=True)
-    spaced_output = "\n\n".join(result_lines)
+    if not result_lines:
+        spaced_output = "请输入至少一项"
+    else:
+        spaced_output = "\n\n".join(result_lines)
     st.code(spaced_output, language="text")
 
 # 主函数入口
