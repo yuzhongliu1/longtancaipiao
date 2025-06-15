@@ -81,13 +81,14 @@ def main():
     
         ta_da = st.number_input("她找我打金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
         wo_da = st.number_input("我找她打金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
-        amount_won = st.number_input("她中奖金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
+        ta_won = st.number_input("她中奖金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
+        wo_won = st.number_input("我中奖金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
         include_date = st.checkbox("包含日期", value=True)
     
         kouyong_ta_da = ta_da * 0.96 if ta_da is not None else 0
         kouyong_wo_da = wo_da * 0.96 if wo_da is not None else 0
         income = kouyong_ta_da
-        expense = kouyong_wo_da + (amount_won or 0)
+        expense = kouyong_wo_da + (ta_won or 0)  # 注意这里仍然用她中奖金额作为“我付”内容的基数
         net = income - expense
         action = "我收" if net >= 0 else "我付"
     
@@ -111,11 +112,28 @@ def main():
         else:
             result_lines.append(f"{prefix}{parts_desc[0]}，扣佣后{fmt_num(kouyong_ta_da if ta_da else kouyong_wo_da)}元")
     
-        if amount_won is not None:
-            result_lines.append("未中奖" if amount_won == 0 else f"中奖{fmt_num(amount_won)}元")
+        # 🔧 奖金对比逻辑
+        if ta_won is not None and wo_won is not None:
+            prize_diff = ta_won - wo_won
+            if prize_diff > 0:
+                result_lines.append(f"你中奖{fmt_num(ta_won)}元，我中奖{fmt_num(wo_won)}元，等于你中奖多{fmt_num(prize_diff)}元")
+                net -= prize_diff  # 我方相当于要多付这部分
+            elif prize_diff < 0:
+                result_lines.append(f"你中奖{fmt_num(ta_won)}元，我中奖{fmt_num(wo_won)}元，等于我中奖多{fmt_num(abs(prize_diff))}元")
+                net += abs(prize_diff)  # 我方相当于少付，或者可以收
+            else:
+                result_lines.append(f"你中奖{fmt_num(ta_won)}元，我中奖{fmt_num(wo_won)}元，中奖正好相等")
     
-        if (ta_da is not None or wo_da is not None or amount_won is not None) and net != 0:
-            result_lines.append(f"{action}{fmt_num(abs(net))}元")
+        # ✅ 奖金信息展示
+        if ta_won is not None:
+            result_lines.append("她未中奖" if ta_won == 0 else f"她中奖{fmt_num(ta_won)}元")
+        if wo_won is not None:
+            result_lines.append("我未中奖" if wo_won == 0 else f"我中奖{fmt_num(wo_won)}元")
+    
+        # ✅ 结算总金额
+        if (ta_da is not None or wo_da is not None or ta_won is not None or wo_won is not None) and net != 0:
+            final_action = "我收" if net >= 0 else "我付"
+            result_lines.append(f"{final_action}{fmt_num(abs(net))}元")
 
 
     elif mode == "3":
