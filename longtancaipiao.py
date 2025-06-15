@@ -132,6 +132,10 @@ def main():
                     net += abs(prize_diff)
         elif len(prize_parts_desc) == 1:
             result_lines.append(prize_parts_desc[0])
+            if ta_won and not wo_won:
+                net -= ta_won  # 她中奖多，相当于我多付
+            elif wo_won and not ta_won:
+                net += wo_won  # 我中奖多，相当于我少付
     
         if (ta_da is not None or wo_da is not None or ta_won is not None or wo_won is not None) and net != 0:
             final_action = "我收" if net >= 0 else "我付"
