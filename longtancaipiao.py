@@ -29,7 +29,7 @@ def main():
     
         amount_hit = st.number_input("今日出票金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
         amount_won = st.number_input("今日中奖金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
-        leftover = st.number_input("昨日剩余", value=None, step=1.0, placeholder="请输入")
+        leftover = st.number_input("昨日剩余", min_value=0.0, value=None, step=1.0, placeholder="请输入")
         if leftover is not None and leftover != 0:
             options = [f"我收{fmt_num(leftover)}元", f"我付{fmt_num(leftover)}元"]
             leftover_choice = st.radio("选择昨日剩余类型", options)
