@@ -11,16 +11,6 @@ def fmt_num(n):
 
 def main():
     st.set_page_config(page_title="📋 彩票结算工具", page_icon="📋")
-    st.markdown("""
-    <style>
-    .horizontal-container {
-        display: flex !important;
-        flex-direction: row !important;
-        gap: 10px;
-        justify-content: start;
-    }
-    </style>
-    """, unsafe_allow_html=True)
     st.title("📋 彩票结算工具")
     st.markdown("支持 **模式1（钱多多）**、**模式2（大赢家）** 和 **模式3（无佣金）**")
 
@@ -43,7 +33,7 @@ def main():
         leftover = st.number_input("昨日剩余", value=None, step=1.0, placeholder="请输入")
         if leftover is not None:
             #leftover_choice = st.radio("昨日剩余", options=["我收", "我付"])
-            choice = st.session_state.get("choice", None)
+            leftover_choice = st.session_state.get("choice", None)
             
             col1, col2 = st.columns(2)
             
@@ -55,18 +45,6 @@ def main():
                     st.session_state.choice = "我付"
         include_date = st.checkbox("包含日期", value=True)
         has_h = st.checkbox("包含合买")
-        container = st.container()
-
-        with container:
-            st.markdown('<div class="horizontal-container">', unsafe_allow_html=True)
-            col1, col2 = st.columns(2)
-            with col1:
-                if st.button("我收"):
-                    st.session_state.choice = "我收"
-            with col2:
-                if st.button("我付"):
-                    st.session_state.choice = "我付"
-            st.markdown('</div>', unsafe_allow_html=True)
 
         if leftover is not None and leftover_choice == "我付":
             leftover = -leftover  # 内部转成负数
