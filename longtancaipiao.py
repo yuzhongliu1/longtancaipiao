@@ -82,8 +82,10 @@ def main():
             parts_desc.append(f"你找我打{fmt_num(ta_da)}元")
         if wo_da:
             parts_desc.append(f"我找你打{fmt_num(wo_da)}元")
-            
-        if len(parts_desc) == 2:
+
+        if len(parts_desc) == 0:
+            pass
+        elif len(parts_desc) == 2:
             diff = ta_da - wo_da
             tag = "你找我打" if diff > 0 else "我找你打"
             if diff == 0:
