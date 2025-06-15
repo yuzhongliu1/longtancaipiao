@@ -88,7 +88,7 @@ def main():
         kouyong_ta_da = ta_da * 0.96 if ta_da is not None else 0
         kouyong_wo_da = wo_da * 0.96 if wo_da is not None else 0
         income = kouyong_ta_da
-        expense = kouyong_wo_da + (ta_won or 0)  # 注意这里仍然用她中奖金额作为“我付”内容的基数
+        expense = kouyong_wo_da #+ (ta_won or 0)  # 注意这里仍然用她中奖金额作为“我付”内容的基数
         net = income - expense
         action = "我收" if net >= 0 else "我付"
     
