@@ -101,7 +101,7 @@ def main():
                 result_lines.append(f"合买{fmt_num(fen)}份，每份{fmt_num(price)}元，我付{fmt_num(total_hemai)}元")
         
         # 输出最后的结算结果
-        if amount_hit is not None or amount_won is not None:
+        if amount_hit is not None or amount_won is not None or leftover is not None:
             result_lines.append(f"{action}{fmt_num(abs(net))}元" + ("，记着明天打票抵扣" if action == "我付" and abs(net) < 500 else ""))
 
     # ===== 模式2：大赢家 =====
