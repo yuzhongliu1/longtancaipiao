@@ -94,7 +94,8 @@ def main():
                 result_lines.append(f"{prefix}昨日我应收{fmt_num(leftover)}元")
             elif leftover < 0:
                 result_lines.append(f"{prefix}昨日我应付{fmt_num(abs(leftover))}元")
-            result_lines.append(f"{action}{fmt_num(abs(net))}元")
+            action = "我收" if leftover >= 0 else "我付"
+            result_lines.append(f"{action}{fmt_num(abs(leftover))}元")
 
         # 输出合买信息
         if has_h and fen is not None and price is not None:
