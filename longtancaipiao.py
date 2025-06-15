@@ -14,7 +14,6 @@ def main():
     st.title("📋 彩票结算工具")
     st.markdown("支持 **模式1（钱多多）**、**模式2（大赢家）** 和 **模式3（无佣金）**")
 
-    # Set timezone to China (UTC+8)
     china_time = datetime.now(timezone(timedelta(hours=8)))
     today_str = f"{china_time.month}月{china_time.day}日"
 
