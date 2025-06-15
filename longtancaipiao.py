@@ -1,15 +1,6 @@
 import streamlit as st
 from datetime import datetime, timedelta, timezone
 
-st.markdown("""
-<style>
-/* 使 radio 按钮选项水平排列 */
-div[data-baseweb="radio"] > div {
-    flex-direction: row !important;
-}
-</style>
-""", unsafe_allow_html=True)
-
 # Format numbers nicely
 def fmt_num(n):
     if n is None:
@@ -20,6 +11,14 @@ def fmt_num(n):
 
 def main():
     st.set_page_config(page_title="📋 彩票结算工具", page_icon="📋")
+    st.markdown("""
+    <style>
+    /* 使 radio 按钮选项水平排列 */
+    div[data-baseweb="radio"] > div {
+        flex-direction: row !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
     st.title("📋 彩票结算工具")
     st.markdown("支持 **模式1（钱多多）**、**模式2（大赢家）** 和 **模式3（无佣金）**")
 
