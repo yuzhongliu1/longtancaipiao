@@ -13,9 +13,11 @@ def main():
     st.set_page_config(page_title="📋 彩票结算工具", page_icon="📋")
     st.markdown("""
     <style>
-    /* 使 radio 按钮选项水平排列 */
-    div[data-baseweb="radio"] > div {
+    .horizontal-container {
+        display: flex !important;
         flex-direction: row !important;
+        gap: 10px;
+        justify-content: start;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -53,6 +55,18 @@ def main():
                     st.session_state.choice = "我付"
         include_date = st.checkbox("包含日期", value=True)
         has_h = st.checkbox("包含合买")
+        container = st.container()
+
+        with container:
+            st.markdown('<div class="horizontal-container">', unsafe_allow_html=True)
+            col1, col2 = st.columns(2)
+            with col1:
+                if st.button("我收"):
+                    st.session_state.choice = "我收"
+            with col2:
+                if st.button("我付"):
+                    st.session_state.choice = "我付"
+            st.markdown('</div>', unsafe_allow_html=True)
 
         if leftover is not None and leftover_choice == "我付":
             leftover = -leftover  # 内部转成负数
