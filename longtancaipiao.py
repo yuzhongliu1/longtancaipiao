@@ -133,7 +133,7 @@ def main():
     if not result_lines:
         full_output = f"{today_str}，无下注"
     else:
-        full_output = "\n".join(result_lines)
+        full_output = "\n\n".join(result_lines)
 
     # Green result box (visual only)
     st.markdown("""
