@@ -31,11 +31,14 @@ def main():
     
         amount_hit = st.number_input("今日出票金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
         amount_won = st.number_input("今日中奖金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
-        leftover = st.number_input("昨日剩余（正数我收，负数我付）", value=None, step=1.0, placeholder="请输入")
+        leftover = st.number_input("昨日剩余", value=None, step=1.0, placeholder="请输入")
         if leftover is not None:
-            leftover_choice = st.radio("选择开关", options=["关闭", "开启"])
+            leftover_choice = st.radio("昨日剩余", options=["我收", "我付"])
         include_date = st.checkbox("包含日期", value=True)
         has_h = st.checkbox("包含合买")
+
+        if leftover_choice == "我付":
+            leftover = -leftover  # 内部转成负数
     
         fen = price = total_hemai = None
         if has_h:
