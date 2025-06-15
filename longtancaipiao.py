@@ -41,16 +41,16 @@ def main():
         leftover = st.number_input("昨日剩余", value=None, step=1.0, placeholder="请输入")
         if leftover is not None:
             #leftover_choice = st.radio("昨日剩余", options=["我收", "我付"])
-            col1, col2 = st.columns(2)
+            choice = st.session_state.get("choice", None)
             
-            choice = None
+            col1, col2 = st.columns(2)
             
             with col1:
                 if st.button("我收"):
-                    choice = "我收"
+                    st.session_state.choice = "我收"
             with col2:
                 if st.button("我付"):
-                    choice = "我付"
+                    st.session_state.choice = "我付"
         include_date = st.checkbox("包含日期", value=True)
         has_h = st.checkbox("包含合买")
 
