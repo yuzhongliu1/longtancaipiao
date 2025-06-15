@@ -61,7 +61,7 @@ def main():
         if has_h and fen is not None and price is not None:
             result_lines.append(f"合买{fmt_num(fen)}份，每份{fmt_num(price)}元，我付{fmt_num(total_hemai)}元")
         
-        if result_lines is not None:
+        if amount_hit is not None or amount_won is not None:
             result_lines.append(f"{action}{fmt_num(abs(net))}元" + ("，记着明天打票抵扣" if action == "我付" and abs(net) < 500 else ""))
 
     elif mode == "2":
@@ -82,10 +82,8 @@ def main():
             parts_desc.append(f"你找我打{fmt_num(ta_da)}元")
         if wo_da:
             parts_desc.append(f"我找你打{fmt_num(wo_da)}元")
-
-        if not parts_desc:
-            result_lines.append(f"{today_str}，无下注")
-        elif len(parts_desc) == 2:
+            
+        if len(parts_desc) == 2:
             diff = ta_da - wo_da
             tag = "你找我打" if diff > 0 else "我找你打"
             if diff == 0:
@@ -97,7 +95,8 @@ def main():
 
         if amount_won is not None:
             result_lines.append("未中奖" if amount_won == 0 else f"中奖{fmt_num(amount_won)}元")
-        result_lines.append(f"{action}{fmt_num(abs(net))}元")
+        if ta_da is not None or wo_da is not None or amount_won is not None:
+            result_lines.append(f"{action}{fmt_num(abs(net))}元")
 
     elif mode == "3":
         st.subheader("模式3：无佣金模式")
