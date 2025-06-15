@@ -114,7 +114,7 @@ def main():
         if amount_won is not None:
             result_lines.append("未中奖" if amount_won == 0 else f"中奖{fmt_num(amount_won)}元")
     
-        if ta_da is not None or wo_da is not None or amount_won is not None:
+        if (ta_da is not None or wo_da is not None or amount_won is not None) and net != 0:
             result_lines.append(f"{action}{fmt_num(abs(net))}元")
 
 
