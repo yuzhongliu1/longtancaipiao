@@ -94,6 +94,7 @@ def main():
                 result_lines.append(f"{prefix}昨日我应收{fmt_num(leftover)}元")
             elif leftover < 0:
                 result_lines.append(f"{prefix}昨日我应付{fmt_num(abs(leftover))}元")
+            result_lines.append(f"{action}{fmt_num(abs(net))}元")
 
         # 输出合买信息
         if has_h and fen is not None and price is not None:
@@ -101,7 +102,7 @@ def main():
                 result_lines.append(f"合买{fmt_num(fen)}份，每份{fmt_num(price)}元，我付{fmt_num(total_hemai)}元")
         
         # 输出最后的结算结果
-        if amount_hit is not None or amount_won is not None or leftover is not None:
+        if amount_hit is not None or amount_won is not None:
             result_lines.append(f"{action}{fmt_num(abs(net))}元" + ("，记着明天打票抵扣" if action == "我付" and abs(net) < 500 else ""))
 
     # ===== 模式2：大赢家 =====
@@ -178,7 +179,7 @@ def main():
         st.subheader("模式3：无佣金模式")
         amount_hit = st.number_input("今日出票金额", min_value=0.0, value=None, step=1.0, placeholder="请输入") or 0
         amount_won = st.number_input("今日中奖金额", min_value=0.0, value=None, step=1.0, placeholder="请输入") or 0
-        include_date = st.checkbox("包含日期", value=True)
+        include_date = st.checkbox("包含日期")
     
         if amount_hit != 0 or amount_won != 0:
             prefix = f"{today_str}，" if include_date else ""
