@@ -162,7 +162,7 @@ def main():
     st.markdown(f"<div class='green-box'>{full_output}</div>", unsafe_allow_html=True)
     st.markdown("<h4>结算结果可在下方复制</h4>", unsafe_allow_html=True)
     # Code box with built-in copy button
-    spaced_output = "\n".join(result_lines)
+    spaced_output = "\n\n".join(result_lines)
     st.code(spaced_output, language="text")
 
 if __name__ == "__main__":
