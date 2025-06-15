@@ -32,13 +32,10 @@ def main():
         amount_hit = st.number_input("今日出票金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
         amount_won = st.number_input("今日中奖金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
         leftover = st.number_input("昨日剩余（正数我收，负数我付）", value=None, step=1.0, placeholder="请输入")
+        if leftover is not None:
+            leftover_choice = st.radio("选择开关", options=["关闭", "开启"])
         include_date = st.checkbox("包含日期", value=True)
         has_h = st.checkbox("包含合买")
-        binary_choice = st.radio("选择开关", options=["关闭", "开启"])
-    # binary_choice will be "关闭" or "开启"
-    # You can convert to bool: binary_choice == "开启"
-
-
     
         fen = price = total_hemai = None
         if has_h:
