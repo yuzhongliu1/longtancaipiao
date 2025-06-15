@@ -73,11 +73,16 @@ def main():
 
         # 构造第一行输出（出票）
         if amount_hit is not None:
-            first_line = f"{prefix}出票{fmt_num(amount_hit)}元，扣佣后{fmt_num(kouyong)}元"
+            if amount_hit == 0:
+                first_line = f"{prefix}未出票"
+            else:
+                first_line = f"{prefix}出票{fmt_num(amount_hit)}元，扣佣后{fmt_num(kouyong)}元"
             if leftover and leftover > 0:
                 first_line += f"，昨日我应收{fmt_num(leftover)}元，共收{fmt_num(adjusted_hit)}元"
             result_lines.append(first_line)
-
+        else:
+            first_line = f"{prefix}未出票"
+            
         # 构造第二行输出（中奖）
         if amount_won is not None:
             second_line = "未中奖" if amount_won == 0 else f"中奖{fmt_num(amount_won)}元"
@@ -87,7 +92,8 @@ def main():
 
         # 输出合买信息
         if has_h and fen is not None and price is not None:
-            result_lines.append(f"合买{fmt_num(fen)}份，每份{fmt_num(price)}元，我付{fmt_num(total_hemai)}元")
+            if total_hemai != 0:
+                result_lines.append(f"合买{fmt_num(fen)}份，每份{fmt_num(price)}元，我付{fmt_num(total_hemai)}元")
         
         # 输出最后的结算结果
         if amount_hit is not None or amount_won is not None:
