@@ -88,6 +88,13 @@ def main():
                 second_line += f"，昨日我应付{fmt_num(abs(leftover))}元，共付{fmt_num(adjusted_won)}元"
             result_lines.append(second_line)
 
+        # 如果既没有出票也没有中奖，但有昨日剩余，也要输出
+        if amount_hit is None and amount_won is None and leftover:
+            if leftover > 0:
+                result_lines.append(f"{prefix}昨日我应收{fmt_num(leftover)}元")
+            elif leftover < 0:
+                result_lines.append(f"{prefix}昨日我应付{fmt_num(abs(leftover))}元")
+
         # 输出合买信息
         if has_h and fen is not None and price is not None:
             if total_hemai != 0:
