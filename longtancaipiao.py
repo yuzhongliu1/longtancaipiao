@@ -102,8 +102,8 @@ def main():
 
     elif mode == "3":
         st.subheader("模式3：无佣金模式")
-        amount_hit = st.number_input("今日出票金额", min_value=0.0, value=None, placeholder="请输入")
-        amount_won = st.number_input("今日中奖金额", min_value=0.0, value=None, placeholder="请输入")
+        amount_hit = st.number_input("今日出票金额", min_value=0.0, value=None, placeholder="请输入") or 0
+        amount_won = st.number_input("今日中奖金额", min_value=0.0, value=None, placeholder="请输入") or 0
 
         if amount_hit is not None or amount_won is not None:
             result_lines.append(f"{today_str}，出票{fmt_num(amount_hit)}元，中奖{fmt_num(amount_won)}元")
