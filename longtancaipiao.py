@@ -1,6 +1,15 @@
 import streamlit as st
 from datetime import datetime, timedelta, timezone
 
+st.markdown("""
+<style>
+/* 使 radio 按钮选项水平排列 */
+div[data-baseweb="radio"] > div {
+    flex-direction: row !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
 # Format numbers nicely
 def fmt_num(n):
     if n is None:
