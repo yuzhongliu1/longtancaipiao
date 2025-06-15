@@ -106,7 +106,7 @@ def main():
             diff = ta_da - wo_da
             tag = "你找我打" if diff > 0 else "我找你打"
             if diff == 0:
-                result_lines.append(f"{prefix}{parts_desc[0]}，{parts_desc[1]}，正好抵消")
+                result_lines.append(f"{prefix}{parts_desc[0]}，{parts_desc[1]}")
             else:
                 result_lines.append(f"{prefix}{parts_desc[0]}，{parts_desc[1]}，等于{tag}{fmt_num(abs(diff))}元，扣佣后{fmt_num(abs(diff) * 0.96)}元")
         else:
@@ -137,9 +137,12 @@ def main():
             elif wo_won and not ta_won:
                 net += wo_won  # 我中奖多，相当于我少付
     
-        if (ta_da is not None or wo_da is not None or ta_won is not None or wo_won is not None) and net != 0:
-            final_action = "我收" if net >= 0 else "我付"
-            result_lines.append(f"{final_action}{fmt_num(abs(net))}元")
+        if (ta_da is not None or wo_da is not None or ta_won is not None or wo_won is not None):
+            if net != 0:
+                final_action = "我收" if net >= 0 else "我付"
+                result_lines.append(f"{final_action}{fmt_num(abs(net))}元")
+            else:
+                result_lines.append("正好抵消")
 
 
     elif mode == "3":
