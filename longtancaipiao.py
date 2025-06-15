@@ -31,17 +31,7 @@ def main():
         amount_won = st.number_input("今日中奖金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
         leftover = st.number_input("昨日剩余", value=None, step=1.0, placeholder="请输入")
         if leftover is not None:
-            #leftover_choice = st.radio("昨日剩余", options=["我收", "我付"])
-            leftover_choice = st.session_state.get("choice", None)
-            
-            col1, col2 = st.columns(2)
-            
-            with col1:
-                if st.button("我收"):
-                    st.session_state.choice = "我付"
-            with col2:
-                if st.button("我付"):
-                    st.session_state.choice = "我收"
+            leftover_choice = st.radio("", options=[f"昨日我收{leftover}元", f"我付{leftover}元"])
         include_date = st.checkbox("包含日期", value=True)
         has_h = st.checkbox("包含合买")
 
