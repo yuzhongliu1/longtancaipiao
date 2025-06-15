@@ -72,15 +72,13 @@ def main():
         prefix = f"{today_str}，" if include_date else ""
 
         # 构造第一行输出（出票）
-        if amount_hit is None or amount_hit == 0:
-            result_lines.append(f"{prefix}未出票")
+        if amount_hit == 0:
+            first_line = f"{prefix}未出票"
         else:
             first_line = f"{prefix}出票{fmt_num(amount_hit)}元，扣佣后{fmt_num(kouyong)}元"
-            if leftover and leftover > 0:
-                first_line += f"，昨日我应收{fmt_num(leftover)}元，共收{fmt_num(adjusted_hit)}元"
-            result_lines.append(first_line)
-
-
+        if leftover and leftover > 0:
+            first_line += f"，昨日我应收{fmt_num(leftover)}元，共收{fmt_num(adjusted_hit)}元"
+        result_lines.append(first_line)
             
         # 构造第二行输出（中奖）
         if amount_won is not None:
