@@ -112,25 +112,32 @@ def main():
         else:
             result_lines.append(f"{prefix}{parts_desc[0]}，扣佣后{fmt_num(kouyong_ta_da if ta_da else kouyong_wo_da)}元")
     
-        # 🔧 奖金对比逻辑
-        if ta_won is not None and wo_won is not None:
+        # 中奖金额处理逻辑
+        prize_parts_desc = []
+        if ta_won:
+            prize_parts_desc.append(f"你中奖{fmt_num(ta_won)}元")
+        if wo_won:
+            prize_parts_desc.append(f"我中奖{fmt_num(wo_won)}元")
+        
+        if len(prize_parts_desc) == 2:
             prize_diff = ta_won - wo_won
-            if prize_diff > 0:
-                result_lines.append(f"你中奖{fmt_num(ta_won)}元，我中奖{fmt_num(wo_won)}元，等于你中奖多{fmt_num(prize_diff)}元")
-                net -= prize_diff  # 我方相当于要多付这部分
-            elif prize_diff < 0:
-                result_lines.append(f"你中奖{fmt_num(ta_won)}元，我中奖{fmt_num(wo_won)}元，等于我中奖多{fmt_num(abs(prize_diff))}元")
-                net += abs(prize_diff)  # 我方相当于少付，或者可以收
+            prize_tag = "你中奖" if prize_diff > 0 else "我中奖"
+            if prize_diff == 0:
+                result_lines.append(f"{prize_parts_desc[0]}，{prize_parts_desc[1]}，中奖正好相等")
             else:
-                result_lines.append(f"你中奖{fmt_num(ta_won)}元，我中奖{fmt_num(wo_won)}元，中奖正好相等")
-    
-        # ✅ 奖金信息展示
+                result_lines.append(f"{prize_parts_desc[0]}，{prize_parts_desc[1]}，等于{prize_tag}{fmt_num(abs(prize_diff))}元")
+                if prize_diff > 0:
+                    net -= prize_diff
+                else:
+                    net += abs(prize_diff)
+        elif len(prize_parts_desc) == 1:
+            result_lines.append(prize_parts_desc[0])
+
         if ta_won is not None:
             result_lines.append("她未中奖" if ta_won == 0 else f"她中奖{fmt_num(ta_won)}元")
         if wo_won is not None:
             result_lines.append("我未中奖" if wo_won == 0 else f"我中奖{fmt_num(wo_won)}元")
     
-        # ✅ 结算总金额
         if (ta_da is not None or wo_da is not None or ta_won is not None or wo_won is not None) and net != 0:
             final_action = "我收" if net >= 0 else "我付"
             result_lines.append(f"{final_action}{fmt_num(abs(net))}元")
