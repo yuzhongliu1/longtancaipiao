@@ -10,8 +10,8 @@ def fmt_num(n):
     return f"{n:.2f}".rstrip('0').rstrip('.')
 
 def main():
-    st.set_page_config(page_title="📋 彩票结算工具", page_icon="📋")
-    st.title("📋 彩票结算工具")
+    st.set_page_config(page_title="🧮 彩票结算工具", page_icon="🧮")
+    st.title("🧮 彩票结算工具")
     st.markdown("支持 **模式1（钱多多）**、**模式2（大赢家）** 和 **模式3（无佣金）**")
 
     china_time = datetime.now(timezone(timedelta(hours=8)))
