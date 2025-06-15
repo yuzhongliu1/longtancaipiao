@@ -88,7 +88,7 @@ def main():
         kouyong_ta_da = ta_da * 0.96 if ta_da is not None else 0
         kouyong_wo_da = wo_da * 0.96 if wo_da is not None else 0
         income = kouyong_ta_da
-        expense = kouyong_wo_da #+ (ta_won or 0)  # 注意这里仍然用她中奖金额作为“我付”内容的基数
+        expense = kouyong_wo_da
         net = income - expense
         action = "我收" if net >= 0 else "我付"
     
@@ -106,7 +106,7 @@ def main():
             diff = ta_da - wo_da
             tag = "你找我打" if diff > 0 else "我找你打"
             if diff == 0:
-                result_lines.append(f"{prefix}{parts_desc[0]}，{parts_desc[1]}")
+                result_lines.append(f"{prefix}{parts_desc[0]}，{parts_desc[1]}，出票抵消")
             else:
                 result_lines.append(f"{prefix}{parts_desc[0]}，{parts_desc[1]}，等于{tag}{fmt_num(abs(diff))}元，扣佣后{fmt_num(abs(diff) * 0.96)}元")
         else:
@@ -123,7 +123,7 @@ def main():
             prize_diff = ta_won - wo_won
             prize_tag = "你中奖" if prize_diff > 0 else "我中奖"
             if prize_diff == 0:
-                result_lines.append(f"{prize_parts_desc[0]}，{prize_parts_desc[1]}，中奖正好相等")
+                result_lines.append(f"{prize_parts_desc[0]}，{prize_parts_desc[1]}，中奖抵消")
             else:
                 result_lines.append(f"{prize_parts_desc[0]}，{prize_parts_desc[1]}，等于{prize_tag}{fmt_num(abs(prize_diff))}元")
                 if prize_diff > 0:
