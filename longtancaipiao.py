@@ -124,7 +124,7 @@ def main():
     # Green result box (visual only)
     st.markdown("""
     <style>
-    .green-box {
+    div[data-testid="stMarkdownContainer"] .green-box {
         background-color: #e6ffe6;
         border-left: 5px solid #33cc33;
         padding: 15px;
@@ -134,10 +134,11 @@ def main():
         font-family: monospace;
         font-size: 16px;
         line-height: 1.6;
-        color: black;  /* <-- Add this line */
+        color: black !important;
     }
     </style>
     """, unsafe_allow_html=True)
+
     
     st.markdown(f"<div class='green-box'>{full_output}</div>", unsafe_allow_html=True)
 
