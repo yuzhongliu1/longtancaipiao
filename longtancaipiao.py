@@ -60,8 +60,9 @@ def main():
 
         if has_h and fen is not None and price is not None:
             result_lines.append(f"合买{fmt_num(fen)}份，每份{fmt_num(price)}元，我付{fmt_num(total_hemai)}元")
-
-        result_lines.append(f"{action}{fmt_num(abs(net))}元" + ("，记着明天打票抵扣" if action == "我付" and abs(net) < 500 else ""))
+        
+        if result_lines is not None:
+            result_lines.append(f"{action}{fmt_num(abs(net))}元" + ("，记着明天打票抵扣" if action == "我付" and abs(net) < 500 else ""))
 
     elif mode == "2":
         st.subheader("模式2：大赢家模式")
