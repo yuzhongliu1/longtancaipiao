@@ -104,9 +104,12 @@ def main():
         st.subheader("模式3：无佣金模式")
         amount_hit = st.number_input("今日出票金额", min_value=0.0, value=None, step=1.0, placeholder="请输入") or 0
         amount_won = st.number_input("今日中奖金额", min_value=0.0, value=None, step=1.0, placeholder="请输入") or 0
-
+        include_date = st.checkbox("包含日期", value=True)
+    
         if amount_hit != 0 or amount_won != 0:
-            result_lines.append(f"{today_str}，出票{fmt_num(amount_hit)}元，中奖{fmt_num(amount_won)}元")
+            prefix = f"{today_str}，" if include_date else ""
+            result_lines.append(f"{prefix}出票{fmt_num(amount_hit)}元，中奖{fmt_num(amount_won)}元")
+    
             if amount_hit is not None and amount_won is not None:
                 net = amount_hit - amount_won
                 if net == 0:
@@ -134,20 +137,14 @@ def main():
         font-family: monospace;
         font-size: 16px;
         line-height: 1.6;
-        color: black !important;
-    }
+        color: black !important;}
     </style>
     """, unsafe_allow_html=True)
 
-    
     st.markdown(f"<div class='green-box'>{full_output}</div>", unsafe_allow_html=True)
-
     st.markdown("<h4>结算结果可在下方复制</h4>", unsafe_allow_html=True)
-
     # Code box with built-in copy button
     st.code(full_output, language="text")
-
-
 
 if __name__ == "__main__":
     main()
