@@ -1,7 +1,6 @@
 import streamlit as st
 from datetime import datetime, timedelta, timezone
 
-# Format numbers nicely
 def fmt_num(n):
     if n is None:
         return "—"
