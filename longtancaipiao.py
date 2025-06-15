@@ -105,7 +105,7 @@ def main():
         amount_hit = st.number_input("今日出票金额", min_value=0.0, value=None, placeholder="请输入") or 0
         amount_won = st.number_input("今日中奖金额", min_value=0.0, value=None, placeholder="请输入") or 0
 
-        if amount_hit is not None or amount_won is not None:
+        if amount_hit != 0 or amount_won != 0:
             result_lines.append(f"{today_str}，出票{fmt_num(amount_hit)}元，中奖{fmt_num(amount_won)}元")
             if amount_hit is not None and amount_won is not None:
                 net = amount_hit - amount_won
