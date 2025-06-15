@@ -36,7 +36,7 @@ def main():
         include_date = st.checkbox("包含日期", value=True)
         has_h = st.checkbox("包含合买")
 
-        if leftover_choice == "我付":
+        if leftover is not None and leftover_choice == "我付":
             leftover = -leftover  # 内部转成负数
     
         fen = price = total_hemai = None
