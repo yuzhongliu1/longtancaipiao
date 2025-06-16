@@ -113,6 +113,10 @@ def main():
         if amount_hit is not None or amount_won is not None:
             result_lines.append(f"{action}{fmt_num(abs(net))}元" + ("，记着明天打票抵扣" if action == "我付" and abs(net) < 500 else ""))
 
+        # 彩蛋
+        if fen == 5201314:
+            result_lines.append("茜子宝贝我也爱你")
+
     # ===== 模式2：大赢家 =====
     elif mode == "2":
         st.subheader("模式2：大赢家模式")
