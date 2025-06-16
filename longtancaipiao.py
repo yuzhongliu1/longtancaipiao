@@ -218,7 +218,7 @@ def main():
 
     elif mode == "4":
         st.subheader("模式4：无模式")
-        col1, col2 = st.columns(2)
+        col1, col2 = st.columns([1, 1])
         with col1:
             hit = st.number_input("出票金额", min_value=0.0, value=0.0, step=1.0)      
         with col2:
