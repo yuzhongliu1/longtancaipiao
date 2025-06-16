@@ -215,6 +215,15 @@ def main():
                 action = "我收" if net >= 0 else "我付"
                 result_lines.append(f"{action}{fmt_num(abs(net))}元")
 
+    elif mode == "4"
+        st.subheader("模式4：无模式")
+        col1, col2 = st.columns(2)
+        with col1:
+            hit = st.number_input("出票金额", min_value=0.0, value=0.0, step=1.0)      
+        with col2:
+            won = st.number_input("中奖金额", min_value=0.0, value=0.0, step=1.0)
+
+
     # ===== 输出渲染 =====
     if not result_lines:
         full_output = f"{today_str}，无下注"
