@@ -218,6 +218,20 @@ def main():
 
     elif mode == "4":
         st.subheader("模式4：无模式")
+        st.markdown(
+            """
+            <style>
+            @media only screen and (max-width: 600px) {
+                div[data-testid="stColumns"] > div {
+                    flex: 0 0 50% !important;
+                    max-width: 50% !important;
+                }
+            }
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
+
         col1, col2 = st.columns([1, 1])
         with col1:
             hit = st.number_input("出票金额", min_value=0.0, value=0.0, step=1.0)      
