@@ -20,10 +20,11 @@ def main():
     today_str = f"{china_time.month}月{china_time.day}日"
 
     # 模式选择下拉框，显示为中文名称
-    mode = st.selectbox("请选择模式", ["1", "2", "3"], format_func=lambda x: {
+    mode = st.selectbox("请选择模式", ["1", "2", "3", "4"], format_func=lambda x: {
         "1": "模式1：钱多多模式",
         "2": "模式2：大赢家模式",
-        "3": "模式3：无佣金模式"
+        "3": "模式3：无佣金模式",
+        "4": "模式4：无模式",
     }[x])
 
     result_lines = []  # 用于存储每行结算说明文本
@@ -215,7 +216,7 @@ def main():
                 action = "我收" if net >= 0 else "我付"
                 result_lines.append(f"{action}{fmt_num(abs(net))}元")
 
-    elif mode == "4"
+    elif mode == "4":
         st.subheader("模式4：无模式")
         col1, col2 = st.columns(2)
         with col1:
