@@ -53,7 +53,8 @@ def main():
         if has_h:
             fen = st.number_input("合买份数", min_value=0.0, value=None, step=1.0, placeholder="请输入")
             price = st.number_input("每份金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
-            total_hemai, total_hemai_kouyong = 0
+            total_hemai = 0
+            total_hemai_kouyong = 0
             if fen is not None and price is not None:
                 total_hemai = fen * price  # 合买总金额
                 total_hemai_kouyong = total_hemai * 0.92  # 合买扣佣后
