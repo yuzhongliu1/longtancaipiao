@@ -80,8 +80,8 @@ def main():
             if leftover and leftover > 0:
                 first_line += f"，昨日我应收{fmt_num(leftover)}元，共收{fmt_num(adjusted_hit)}元"
             result_lines.append(first_line)
-            if amount_won is None and leftover < 0:
-                result_lines.append(f"昨日我应付{fmt_num(leftover)}元")
+            if amount_won is None and leftover and leftover < 0:
+                result_lines.append(f"昨日我应付{fmt_num(abs(leftover))}元")
             
         # 构造第二行输出（中奖）
         if amount_won is not None:
@@ -89,7 +89,7 @@ def main():
             if leftover and leftover < 0:
                 second_line += f"，昨日我应付{fmt_num(abs(leftover))}元，共付{fmt_num(adjusted_won)}元"
             result_lines.append(second_line)
-            if amount_hit is None and leftover > 0:
+            if amount_hit is None and leftover and leftover > 0:
                 result_lines.insert(0, f"{prefix}昨日我应收{fmt_num(leftover)}元")
             
         # 如果既没有出票也没有中奖，但有昨日剩余，也要输出
