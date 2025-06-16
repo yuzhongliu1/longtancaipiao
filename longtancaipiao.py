@@ -55,6 +55,7 @@ def main():
             price = st.number_input("每份金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
             if fen is not None and price is not None:
                 total_hemai = fen * price  # 合买总金额
+                total_hemai_kouyong = total_hemai * 0.92  # 合买扣佣后
     
         # 出票金额按96%结算
         kouyong = amount_hit * 0.96 if amount_hit is not None else None
@@ -65,7 +66,7 @@ def main():
             adjusted_hit = leftover if leftover and leftover > 0 else 0
         
         # 加上“我应付的昨日剩余”和合买后，计算我总支出
-        adjusted_won = (amount_won or 0) + (abs(leftover) if leftover and leftover < 0 else 0) + (total_hemai or 0)
+        adjusted_won = (amount_won or 0) + (abs(leftover) if leftover and leftover < 0 else 0) + (total_hemai_kouyong or 0)
 
         # 结算金额 = 收入 - 支出
         net = (adjusted_hit or 0) - (adjusted_won or 0)
@@ -106,7 +107,7 @@ def main():
         # 输出合买信息
         if has_h and fen is not None and price is not None:
             if total_hemai != 0:
-                result_lines.append(f"合买{fmt_num(fen)}份，每份{fmt_num(price)}元，我付{fmt_num(total_hemai)}元")
+                result_lines.append(f"合买{fmt_num(fen)}份{fmt_num(total_hemai)}元，扣佣后{fmt_num(total_hemai_kouyong)}元")
         
         # 输出最后的结算结果
         if amount_hit is not None or amount_won is not None:
