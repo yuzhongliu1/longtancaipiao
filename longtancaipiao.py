@@ -115,7 +115,7 @@ def main():
 
         # 彩蛋
         if fen == 5201314:
-            result_lines.append("茜子宝贝我也爱你")
+            result_lines.append("茜子宝贝窝也爱泥~")
 
     # ===== 模式2：大赢家 =====
     elif mode == "2":
