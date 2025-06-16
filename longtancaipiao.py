@@ -66,7 +66,7 @@ def main():
             adjusted_hit = leftover if leftover and leftover > 0 else 0
         
         # 加上“我应付的昨日剩余”和合买后，计算我总支出
-        adjusted_won = (amount_won or 0) + (abs(leftover) if leftover and leftover < 0 else 0) + (total_hemai_kouyong or 0)
+        adjusted_won = (amount_won or 0) + (abs(leftover) if leftover and leftover < 0 else 0) + (total_hemai_kouyong if total_hemai_kouyong is not None else 0)
 
         # 结算金额 = 收入 - 支出
         net = (adjusted_hit or 0) - (adjusted_won or 0)
