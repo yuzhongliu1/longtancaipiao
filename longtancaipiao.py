@@ -223,10 +223,6 @@ def main():
         qdd = st.number_input("钱多多出票金额", min_value=0.0, value=None, step=1.0, placeholder="选填") 
         dyj = st.number_input("大赢家出票金额", min_value=0.0, value=None, step=1.0, placeholder="选填")
         ggl = st.number_input("刮刮乐金额", min_value=0.0, value=None, step=1.0, placeholder="选填")
-        if qdd is None:
-            qdd = 0
-        if dyj is None:
-            dyj = 0
         total = (fucai or 0) + (ticai or 0) + (ggl or 0)
         total_bendian = max((fucai or 0) + (ticai or 0) - (qdd or 0) - (dyj or 0) + ggl, 0)
         fucai_kouyong = fucai * 0.92 if fucai is not None else 0
@@ -242,9 +238,9 @@ def main():
         if (qdd + dyj) > (fucai + ticai):
             result_lines.append(f"钱多多和大赢家出票大于本店总出票金额，请检查，如正确可忽略")
         if fucai is not None:
-            result_lines.append(f"福彩本店出票约{fmt_num(max(fucai - (dyj or 0)), 0)}元，本店收入约{fmt_num(max((fucai - (dyj or 0)) * 0.08), 0)}元")
+            result_lines.append(f"福彩本店出票约{fmt_num(max((fucai - (dyj or 0)), 0)}元，本店收入约{fmt_num(max(((fucai - (dyj or 0)) * 0.08), 0)}元")
         if ticai is not None:
-            result_lines.append(f"体彩本店出票约{fmt_num(max(ticai - (qdd or 0)), 0)}元，本店收入约{fmt_num(max((ticai - (qdd or 0)) * 0.08), 0)}元")
+            result_lines.append(f"体彩本店出票约{fmt_num(max((ticai - (qdd or 0)), 0)}元，本店收入约{fmt_num(max(((ticai - (qdd or 0)) * 0.08), 0)}元")
         if ggl is not None:
             result_lines.append(f"刮刮乐收入{fmt_num(ggl - ggl_kouyong)}元")
         if fucai is not None or ticai is not None or ggl is not None:
