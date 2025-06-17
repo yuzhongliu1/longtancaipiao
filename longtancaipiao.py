@@ -220,18 +220,12 @@ def main():
         st.subheader("模式4：营业额模式")
         fucai = st.number_input("福彩出票金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
         ticai = st.number_input("体彩出票金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
-        qdd = st.number_input("钱多多出票金额", min_value=0.0, value=None, step=1.0, placeholder="选填") 
+        qdd = st.number_input("钱多多出票金额", min_value=0.0, value=None, step=1.0, placeholder="选填")
         dyj = st.number_input("大赢家出票金额", min_value=0.0, value=None, step=1.0, placeholder="选填")
         ggl = st.number_input("刮刮乐金额", min_value=0.0, value=None, step=1.0, placeholder="选填")
-        total = (fucai or 0) + (ticai or 0) + (ggl or 0)
-        total_bendian = max((fucai or 0) + (ticai or 0) - (qdd or 0) - (dyj or 0) + (ggl or 0), 0)
-        fucai_kouyong = fucai * 0.92 if fucai is not None else 0
-        ticai_kouyong = ticai * 0.92 if ticai is not None else 0
-        ggl_kouyong = ggl * 0.92 if ggl is not None else 0
-        total_kouyong = (fucai_kouyong or 0) + (ticai_kouyong or 0) + (ggl_kouyong or 0)
-        profit = max(((fucai or 0) + (ticai or 0) - (qdd or 0) - (dyj or 0)) * 0.08 + ((qdd or 0) + (dyj or 0)) * 0.04 + (ggl or 0) * 0.08, 0)
         if qdd is not None and fucai is not None and qdd > fucai:
             result_lines.append("钱多多出票大于本店福彩出票金额，请检查，如正确可忽略")
+            st.warning("⚠️ 钱多多出票金额超过了福彩+体彩总收入")
         if qdd is not None and ticai is not None and qdd > ticai:
             result_lines.append("钱多多出票大于本店体彩出票金额，请检查，如正确可忽略")
         if dyj is not None and fucai is not None and dyj > fucai:
@@ -239,7 +233,15 @@ def main():
         if dyj is not None and ticai is not None and dyj > ticai:
             result_lines.append("大赢家出票大于本店体彩出票金额，请检查，如正确可忽略")
         if qdd is not None and dyj is not None and ticai is not None and fucai is not None and (qdd + dyj) > (fucai + ticai):
-            result_lines.append(f"钱多多和大赢家出票大于本店总出票金额，请检查，如正确可忽略")
+            result_lines.append(f"钱多多和大赢家出票大于本店总出票金额，请检查")
+        total = (fucai or 0) + (ticai or 0) + (ggl or 0)
+        total_bendian = max((fucai or 0) + (ticai or 0) - (qdd or 0) - (dyj or 0) + (ggl or 0), 0)
+        fucai_kouyong = fucai * 0.92 if fucai is not None else 0
+        ticai_kouyong = ticai * 0.92 if ticai is not None else 0
+        ggl_kouyong = ggl * 0.92 if ggl is not None else 0
+        total_kouyong = (fucai_kouyong or 0) + (ticai_kouyong or 0) + (ggl_kouyong or 0)
+        profit = max(((fucai or 0) + (ticai or 0) - (qdd or 0) - (dyj or 0)) * 0.08 + ((qdd or 0) + (dyj or 0)) * 0.04 + (ggl or 0) * 0.08, 0)
+        
         if fucai is not None:
             result_lines.append(f"福彩本店出票约{fmt_num(max((fucai - (dyj or 0)), 0))}元，本店收入约{fmt_num(max(((fucai - (dyj or 0)) * 0.08), 0))}元")
         if ticai is not None:
