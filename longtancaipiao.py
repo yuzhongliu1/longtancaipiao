@@ -9,6 +9,24 @@ def fmt_num(n):
         return str(int(n))
     return f"{n:.2f}".rstrip('0').rstrip('.')
 
+def init_session():
+    defaults = {
+        "mode": "1",
+        "amount_hit": None,
+        "amount_won": None,
+        "leftover": None,
+        "leftover_choice": "我收0元",
+        "has_h": False,
+        "fen": None,
+        "price": None,
+        "include_date": True
+    }
+    for k, v in defaults.items():
+        if k not in st.session_state:
+            st.session_state[k] = v
+
+init_session()
+
 def main():
     # 设置网页标题和图标
     st.set_page_config(page_title="🧮 彩票结算工具", page_icon="🧮")
