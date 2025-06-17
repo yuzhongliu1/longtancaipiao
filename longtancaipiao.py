@@ -24,7 +24,7 @@ def main():
         "1": "模式1：钱多多模式",
         "2": "模式2：大赢家模式",
         "3": "模式3：无佣金模式",
-        "4": "模式4：无模式",
+        "4": "模式4：营业额模式",
     }[x])
 
     result_lines = []  # 用于存储每行结算说明文本
@@ -217,7 +217,7 @@ def main():
                 result_lines.append(f"{action}{fmt_num(abs(net))}元")
 
     elif mode == "4":
-        st.subheader("模式4：无模式")
+        st.subheader("模式4：营业额模式")
         fucai = st.number_input("福彩出票金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
         ticai = st.number_input("体彩出票金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
         ggl = st.number_input("刮刮乐金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
@@ -228,14 +228,15 @@ def main():
         total_kouyong = (fucai_kouyong if fucai_kouyong is not None else 0) + (ticai_kouyong if ticai_kouyong is not None else 0) + (ggl_kouyong if ggl_kouyong is not None else 0)
         
         if fucai is not None:
-            result_lines.append(f"福彩扣佣后{fucai_kouyong}元")
+            result_lines.append(f"福彩扣佣后{fmt_num(fucai_kouyong)}元")
         if ticai is not None:
-            result_lines.append(f"体彩扣佣后{ticai_kouyong}元")
+            result_lines.append(f"体彩扣佣后{fmt_num(ticai_kouyong)}元")
         if ggl is not None:
-            result_lines.append(f"刮刮乐扣佣后{ggl_kouyong}元")
+            result_lines.append(f"刮刮乐扣佣后{fmt_num(ggl_kouyong)}元")
         if fucai is not None or ticai is not None or ggl is not None:
-            result_lines.append(f"今日营业额{total}元，扣佣后{total_kouyong}元")
-            result_lines.append(f"今日净收入{total - total_kouyong}元")
+            result_lines.append("")
+            result_lines.append(f"今日营业额{fmt_num(total)}元，扣佣后{fmt_num(total_kouyong)}元")
+            result_lines.append(f"今日净收入{fmt_num(total - total_kouyong)}元")
 
 
     # ===== 输出渲染 =====
