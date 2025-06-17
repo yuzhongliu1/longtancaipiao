@@ -91,7 +91,7 @@ def main():
         if amount_won is not None:
             second_line = "未中奖" if amount_won == 0 else f"中奖{fmt_num(amount_won)}元"
             if leftover and leftover < 0:
-                second_line += f"，昨日我应付{fmt_num(abs(leftover))}元】"
+                second_line += f"，昨日我应付{fmt_num(abs(leftover))}元"
                 if fen is None or price is None:
                     second_line += f"。【共付{fmt_num(adjusted_won)}元】"
             result_lines.append(second_line)
