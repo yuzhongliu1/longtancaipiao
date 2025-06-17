@@ -37,11 +37,6 @@ def main():
     china_time = datetime.now(timezone(timedelta(hours=8)))
     today_str = f"{china_time.month}月{china_time.day}日"
 
-    if "amount_hit" not in st.session_state:
-        st.session_state.amount_hit = None
-    if "amount_won" not in st.session_state:
-        st.session_state.amount_won = None
-
     # 模式选择下拉框，显示为中文名称
     mode = st.selectbox("请选择模式", ["1", "2", "3", "4"], format_func=lambda x: {
         "1": "模式1：钱多多模式",
