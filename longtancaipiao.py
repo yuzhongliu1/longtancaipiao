@@ -265,12 +265,13 @@ def main():
     st.markdown(f"<div class='green-box'>{full_output}</div>", unsafe_allow_html=True)
 
     # 输出结果代码框，方便复制
-    st.markdown("<h4>结算结果可在下方复制</h4>", unsafe_allow_html=True)
-    if not result_lines:
-        spaced_output = "请输入至少一项"
-    else:
-        spaced_output = "\n\n".join(result_lines)
-    st.code(spaced_output, language="text")
+    if mode in ["1", "2", "3"]:
+        st.markdown("<h4>结算结果可在下方复制</h4>", unsafe_allow_html=True)
+        if not result_lines:
+            spaced_output = "请输入至少一项"
+        else:
+            spaced_output = "\n\n".join(result_lines)
+        st.code(spaced_output, language="text")
 
 # 主函数入口
 if __name__ == "__main__":
