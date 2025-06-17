@@ -19,6 +19,11 @@ def main():
     china_time = datetime.now(timezone(timedelta(hours=8)))
     today_str = f"{china_time.month}月{china_time.day}日"
 
+    if "amount_hit" not in st.session_state:
+        st.session_state.amount_hit = None
+    if "amount_won" not in st.session_state:
+        st.session_state.amount_won = None
+
     # 模式选择下拉框，显示为中文名称
     mode = st.selectbox("请选择模式", ["1", "2", "3", "4"], format_func=lambda x: {
         "1": "模式1：钱多多模式",
@@ -34,9 +39,8 @@ def main():
         st.subheader("模式1：钱多多模式")
     
         # 输入区：出票金额、中奖金额、昨日剩余金额
-        amount_hit = st.number_input("今日出票金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
-        st.session_state["amount_hit"] = amount_hit
-        amount_won = st.number_input("今日中奖金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
+        amount_hit = st.number_input("今日出票金额", min_value=0.0, value=st.session_state.amount_hit or None, step=1.0, key="amount_hit", placeholder="请输入")
+        amount_won = st.number_input("今日中奖金额", min_value=0.0, value=st.session_state.amount_won or None, step=1.0, key="amount_won", placeholder="请输入")
         leftover = st.number_input("昨日剩余", min_value=0.0, value=None, step=1.0, placeholder="选填")
         
         # 处理“昨日剩余”的收/付方向
