@@ -225,7 +225,6 @@ def main():
         ggl = st.number_input("刮刮乐金额", min_value=0.0, value=None, step=1.0, placeholder="选填")
         error = False
         if qdd is not None and fucai is not None and qdd > fucai:
-            result_lines.append("钱多多出票大于本店福彩出票金额，请检查，如正确可忽略")
             st.warning("钱多多出票大于本店福彩出票金额，请检查，如正确可忽略")
         if qdd is not None and ticai is not None and qdd > ticai:
             st.warning("钱多多出票大于本店体彩出票金额，请检查，如正确可忽略")
