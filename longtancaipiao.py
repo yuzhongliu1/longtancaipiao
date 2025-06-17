@@ -94,7 +94,8 @@ def main():
                 second_line += f"，昨日我应付{fmt_num(abs(leftover))}元"
                 if fen is None or price is None:
                     second_line += f"。【共付{fmt_num(adjusted_won)}元】"
-            #result_lines.append(second_line)
+            if fen is None or fen == 0 or price is None or price == 0:
+                result_lines.append(second_line)
             if amount_hit is None and leftover and leftover > 0:
                 result_lines.insert(0, f"{prefix}昨日我应收{fmt_num(leftover)}元")
             
