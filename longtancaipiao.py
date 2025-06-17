@@ -224,7 +224,7 @@ def main():
         dyj = st.number_input("大赢家出票金额", min_value=0.0, value=None, step=1.0, placeholder="选填")
         ggl = st.number_input("刮刮乐金额", min_value=0.0, value=None, step=1.0, placeholder="选填")
         total = (fucai or 0) + (ticai or 0) + (ggl or 0)
-        total_bendian = max((fucai or 0) + (ticai or 0) - (qdd or 0) - (dyj or 0) + ggl, 0)
+        total_bendian = max((fucai or 0) + (ticai or 0) - (qdd or 0) - (dyj or 0) + (ggl or 0), 0)
         fucai_kouyong = fucai * 0.92 if fucai is not None else 0
         ticai_kouyong = ticai * 0.92 if ticai is not None else 0
         ggl_kouyong = ggl * 0.92 if ggl is not None else 0
