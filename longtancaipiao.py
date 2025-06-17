@@ -218,11 +218,24 @@ def main():
 
     elif mode == "4":
         st.subheader("模式4：无模式")
-        with st.expander("输入多项数据"):
-            val1 = st.number_input("输入1")
-            val2 = st.number_input("输入2")
-            val3 = st.number_input("输入3")
-
+        fucai = st.number_input("福彩出票金额", min_value=0.0, value=None, step=1.0, placeholder="请输入") or 0
+        ticai = st.number_input("体彩出票金额", min_value=0.0, value=None, step=1.0, placeholder="请输入") or 0
+        ggl = st.number_input("刮刮乐金额", min_value=0.0, value=None, step=1.0, placeholder="请输入") or 0
+        total = (fucai if fucai is not None else 0) + (ticai if ticai is not None else 0) + (ggl if ggl is not None else 0)
+        fucai_kouyong = fucai * 0.93 if fucai is not None else 0
+        ticai_kouyong = ticai * 0.93 if ticai is not None else 0
+        ggl_kouyong = ggl * 0.92 if ggl is not None else 0
+        total_kouyong = (fucai_kouyong if fucai_kouyong is not None else 0) + (ticai_kouyong if ticai_kouyong is not None else 0) + (ggl_kouyong if ggl_kouyong is not None else 0)
+        
+        if fucai is not None:
+            result_lines.append(f"福彩扣佣后{fucai_kouyong}元")
+        if ticai is not None:
+            result_lines.append(f"体彩扣佣后{ticai_kouyong}元")
+        if ggl is not None:
+            result_lines.append(f"刮刮乐扣佣后{ggl_kouyong}元")
+        if fucai is not None or ticai is not None or ggl is not None:
+            result_lines.append(f"今日营业额{total}元，扣佣后{total_kouyong}元")
+            result_lines.append(f"今日净收入{total - total_kouyong}元")
 
 
     # ===== 输出渲染 =====
