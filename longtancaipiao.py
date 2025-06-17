@@ -218,25 +218,11 @@ def main():
 
     elif mode == "4":
         st.subheader("模式4：无模式")
-        st.markdown(
-            """
-            <style>
-            @media only screen and (max-width: 600px) {
-                div[data-testid="stColumns"] > div {
-                    flex: 0 0 50% !important;
-                    max-width: 50% !important;
-                }
-            }
-            </style>
-            """,
-            unsafe_allow_html=True,
-        )
+        with st.expander("输入多项数据"):
+            val1 = st.number_input("输入1")
+            val2 = st.number_input("输入2")
+            val3 = st.number_input("输入3")
 
-        col1, col2 = st.columns([1, 1])
-        with col1:
-            hit = st.number_input("出票金额", min_value=0.0, value=0.0, step=1.0)      
-        with col2:
-            won = st.number_input("中奖金额", min_value=0.0, value=0.0, step=1.0)
 
 
     # ===== 输出渲染 =====
