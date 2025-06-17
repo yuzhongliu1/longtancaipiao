@@ -35,6 +35,7 @@ def main():
     
         # 输入区：出票金额、中奖金额、昨日剩余金额
         amount_hit = st.number_input("今日出票金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
+        st.session_state["amount_hit"] = amount_hit
         amount_won = st.number_input("今日中奖金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
         leftover = st.number_input("昨日剩余", min_value=0.0, value=None, step=1.0, placeholder="选填")
         
