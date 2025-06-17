@@ -82,7 +82,7 @@ def main():
             else:
                 first_line = f"{prefix}出票{fmt_num(amount_hit)}元，扣佣后{fmt_num(kouyong)}元"
             if leftover and leftover > 0:
-                first_line += f"，昨日我应收{fmt_num(leftover)}元，共收{fmt_num(adjusted_hit)}元"
+                first_line += f"，昨日我应收{fmt_num(leftover)}元。【共收{fmt_num(adjusted_hit)}元】"
             result_lines.append(first_line)
             if amount_won is None and leftover and leftover < 0:
                 result_lines.append(f"昨日我应付{fmt_num(abs(leftover))}元")
