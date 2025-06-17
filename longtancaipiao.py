@@ -225,9 +225,10 @@ def main():
         ggl = st.number_input("刮刮乐金额", min_value=0.0, value=None, step=1.0, placeholder="选填")
         if qdd is not None and fucai is not None and qdd > fucai:
             result_lines.append("钱多多出票大于本店福彩出票金额，请检查，如正确可忽略")
-            st.warning("⚠️ 钱多多出票金额超过了福彩+体彩总收入")
+            st.warning("钱多多出票金额超过了福彩+体彩总收入")
         if qdd is not None and ticai is not None and qdd > ticai:
             result_lines.append("钱多多出票大于本店体彩出票金额，请检查，如正确可忽略")
+            st.warning("钱多多出票金额超过了福彩+体彩总收入")
         if dyj is not None and fucai is not None and dyj > fucai:
             result_lines.append("大赢家出票大于本店福彩出票金额，请检查，如正确可忽略")
         if dyj is not None and ticai is not None and dyj > ticai:
