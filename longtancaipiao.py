@@ -36,7 +36,7 @@ def main():
         # 输入区：出票金额、中奖金额、昨日剩余金额
         amount_hit = st.number_input("今日出票金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
         amount_won = st.number_input("今日中奖金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
-        leftover = st.number_input("昨日剩余", min_value=0.0, value=None, step=1.0, placeholder="请输入")
+        leftover = st.number_input("昨日剩余", min_value=0.0, value=None, step=1.0, placeholder="选填")
         
         # 处理“昨日剩余”的收/付方向
         if leftover is not None and leftover != 0:
@@ -220,31 +220,39 @@ def main():
         st.subheader("模式4：营业额模式")
         fucai = st.number_input("福彩出票金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
         ticai = st.number_input("体彩出票金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
-        ggl = st.number_input("刮刮乐金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
+        qdd = st.number_input("钱多多出票金额", min_value=0.0, value=None, step=1.0, placeholder="选填")
+        dyj = st.number_input("大赢家出票金额", min_value=0.0, value=None, step=1.0, placeholder="选填")
+        ggl = st.number_input("刮刮乐金额", min_value=0.0, value=None, step=1.0, placeholder="选填")
         total = (fucai if fucai is not None else 0) + (ticai if ticai is not None else 0) + (ggl if ggl is not None else 0)
-        fucai_kouyong = fucai * 0.93 if fucai is not None else 0
-        ticai_kouyong = ticai * 0.93 if ticai is not None else 0
+        total_bendian = fucai + ticai - (qdd if qdd is not None else 0) - (dyj if dyj is not None else 0)
+        fucai_kouyong = fucai * 0.92 if fucai is not None else 0
+        ticai_kouyong = ticai * 0.92 if ticai is not None else 0
         ggl_kouyong = ggl * 0.92 if ggl is not None else 0
-        total_kouyong = (fucai_kouyong if fucai_kouyong is not None else 0) + (ticai_kouyong if ticai_kouyong is not None else 0) + (ggl_kouyong if ggl_kouyong is not None else 0)
+        total_kouyong = (fucai_kouyong or 0) + (ticai_kouyong or 0) + (ggl_kouyong or 0)
+        profit = ((fucai or 0) + (ticai or 0) - (qdd or 0) - (dyj or 0)) * 0.08 + ((qdd or 0) + (dyj or 0)) * 0.04 + (ggl or 0) * 0.08
         
         if fucai is not None:
-            result_lines.append(f"福彩扣佣后{fmt_num(fucai_kouyong)}元")
+            result_lines.append(f"福彩本店出票{fmt_num(fucai - dyj or 0)}元，本店收入{fmt_num((fucai - dyj or 0) * 0.08)}元")
         if ticai is not None:
-            result_lines.append(f"体彩扣佣后{fmt_num(ticai_kouyong)}元")
+            result_lines.append(f"体彩本店出票{fmt_num(ticai - qdd or 0)}元，本店收入{fmt_num((ticai - qdd or 0) * 0.08)}元")
         if ggl is not None:
-            result_lines.append(f"刮刮乐扣佣后{fmt_num(ggl_kouyong)}元")
+            result_lines.append(f"刮刮乐收入{fmt_num(ggl - ggl_kouyong)}元")
         if fucai is not None or ticai is not None or ggl is not None:
             result_lines.append("----------")
-            result_lines.append(f"今日营业额{fmt_num(total)}元，扣佣后{fmt_num(total_kouyong)}元")
-            result_lines.append(f"今日净收入{fmt_num(total - total_kouyong)}元")
-
+            result_lines.append(f"今日总营业额{fmt_num(total)}元，本店营业额{fmt_num(total_bendian)}元")
+            result_lines.append(f"今日净收入{fmt_num(profit)}元")
+        if fucai is None and ticai is None and ggl is None:
+            result_lines.append("请输入至少一项")
 
     # ===== 输出渲染 =====
-    if not result_lines:
-        full_output = f"{today_str}，无下注"
+    if mode in ["1", "2", "3"]:
+        if not result_lines:
+            full_output = f"{today_str}，无下注"
+        else:
+            full_output = "\n".join(result_lines)
     else:
         full_output = "\n".join(result_lines)
-
+        
     # 自定义绿色背景结果展示框（美观）
     st.markdown("""
     <style>
