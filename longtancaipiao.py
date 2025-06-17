@@ -236,8 +236,9 @@ def main():
         if dyj is not None and fucai is not None:
             if dyj > fucai:
                 result_lines.append("大赢家出票大于本店福彩出票金额，请检查，如正确可忽略")
-        if (qdd + dyj) > (fucai + ticai):
-            result_lines.append(f"钱多多和大赢家出票大于本店总出票金额，请检查，如正确可忽略")
+        if qdd is not None and dyj is not None and ticai is not None and fucai is not None:
+            if (qdd + dyj) > (fucai + ticai):
+                result_lines.append(f"钱多多和大赢家出票大于本店总出票金额，请检查，如正确可忽略")
         if fucai is not None:
             result_lines.append(f"福彩本店出票约{fmt_num(max((fucai - (dyj or 0)), 0))}元，本店收入约{fmt_num(max(((fucai - (dyj or 0)) * 0.08), 0))}元")
         if ticai is not None:
