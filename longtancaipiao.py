@@ -234,7 +234,7 @@ def main():
         if ggl is not None:
             result_lines.append(f"刮刮乐扣佣后{fmt_num(ggl_kouyong)}元")
         if fucai is not None or ticai is not None or ggl is not None:
-            result_lines.append("")
+            result_lines.append("----------")
             result_lines.append(f"今日营业额{fmt_num(total)}元，扣佣后{fmt_num(total_kouyong)}元")
             result_lines.append(f"今日净收入{fmt_num(total - total_kouyong)}元")
 
