@@ -223,6 +223,7 @@ def main():
         qdd = st.number_input("钱多多出票金额", min_value=0.0, value=None, step=1.0, placeholder="选填")
         dyj = st.number_input("大赢家出票金额", min_value=0.0, value=None, step=1.0, placeholder="选填")
         ggl = st.number_input("刮刮乐金额", min_value=0.0, value=None, step=1.0, placeholder="选填")
+        error = False
         if qdd is not None and fucai is not None and qdd > fucai:
             result_lines.append("钱多多出票大于本店福彩出票金额，请检查，如正确可忽略")
             st.warning("钱多多出票大于本店福彩出票金额，请检查，如正确可忽略")
@@ -242,7 +243,7 @@ def main():
         ticai_kouyong = ticai * 0.92 if ticai is not None else 0
         ggl_kouyong = ggl * 0.92 if ggl is not None else 0
         total_kouyong = (fucai_kouyong or 0) + (ticai_kouyong or 0) + (ggl_kouyong or 0)
-        profit = max(((fucai or 0) + (ticai or 0) - (qdd or 0) - (dyj or 0)) * 0.08 + ((qdd or 0) + (dyj or 0)) * 0.04 + (ggl or 0) * 0.08, 0)
+        profit = max(max(((fucai or 0) + (ticai or 0) - (qdd or 0) - (dyj or 0)) * 0.08, 0) + ((qdd or 0) + (dyj or 0)) * 0.04 + (ggl or 0) * 0.08, 0)
         
         if error == False:
             if fucai is not None:
