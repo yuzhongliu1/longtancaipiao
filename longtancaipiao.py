@@ -235,6 +235,7 @@ def main():
         if qdd is not None and dyj is not None and ticai is not None and fucai is not None:
             if (qdd > (fucai + ticai)) or (qdd > (fucai + ticai)) or ((qdd + dyj) > (fucai + ticai)):
                 st.error("钱多多或大赢家出票大于本店总出票金额，请再次核对！")
+                error = True
         total = (fucai or 0) + (ticai or 0) + (ggl or 0)
         total_bendian = max((fucai or 0) + (ticai or 0) - (qdd or 0) - (dyj or 0) + (ggl or 0), 0)
         fucai_kouyong = fucai * 0.92 if fucai is not None else 0
@@ -243,18 +244,19 @@ def main():
         total_kouyong = (fucai_kouyong or 0) + (ticai_kouyong or 0) + (ggl_kouyong or 0)
         profit = max(((fucai or 0) + (ticai or 0) - (qdd or 0) - (dyj or 0)) * 0.08 + ((qdd or 0) + (dyj or 0)) * 0.04 + (ggl or 0) * 0.08, 0)
         
-        if fucai is not None:
-            result_lines.append(f"福彩本店出票约{fmt_num(max((fucai - (dyj or 0)), 0))}元，本店收入约{fmt_num(max(((fucai - (dyj or 0)) * 0.08), 0))}元")
-        if ticai is not None:
-            result_lines.append(f"体彩本店出票约{fmt_num(max((ticai - (qdd or 0)), 0))}元，本店收入约{fmt_num(max(((ticai - (qdd or 0)) * 0.08), 0))}元")
-        if ggl is not None:
-            result_lines.append(f"刮刮乐收入{fmt_num(ggl - ggl_kouyong)}元")
-        if fucai is not None or ticai is not None or ggl is not None:
-            result_lines.append("----------")
-            result_lines.append(f"今日总营业额{fmt_num(total)}元，本店营业额{fmt_num(total_bendian)}元")
-            result_lines.append(f"今日净收入{fmt_num(profit)}元")
-        if fucai is None and ticai is None and ggl is None:
-            result_lines.append("请输入至少一项")
+        if error == False:
+            if fucai is not None:
+                result_lines.append(f"福彩本店出票约{fmt_num(max((fucai - (dyj or 0)), 0))}元，本店收入约{fmt_num(max(((fucai - (dyj or 0)) * 0.08), 0))}元")
+            if ticai is not None:
+                result_lines.append(f"体彩本店出票约{fmt_num(max((ticai - (qdd or 0)), 0))}元，本店收入约{fmt_num(max(((ticai - (qdd or 0)) * 0.08), 0))}元")
+            if ggl is not None:
+                result_lines.append(f"刮刮乐收入{fmt_num(ggl - ggl_kouyong)}元")
+            if fucai is not None or ticai is not None or ggl is not None:
+                result_lines.append("----------")
+                result_lines.append(f"今日总营业额{fmt_num(total)}元，本店营业额{fmt_num(total_bendian)}元")
+                result_lines.append(f"今日净收入{fmt_num(profit)}元")
+            if fucai is None and ticai is None and ggl is None:
+                result_lines.append("请输入至少一项")
 
     # ===== 输出渲染 =====
     if mode in ["1", "2", "3"]:
