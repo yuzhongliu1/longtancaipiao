@@ -232,9 +232,9 @@ def main():
         profit = ((fucai or 0) + (ticai or 0) - (qdd or 0) - (dyj or 0)) * 0.08 + ((qdd or 0) + (dyj or 0)) * 0.04 + (ggl or 0) * 0.08
         
         if fucai is not None:
-            result_lines.append(f"福彩本店出票{fmt_num(fucai - dyj or 0)}元，本店收入{fmt_num((fucai - dyj or 0) * 0.08)}元")
+            result_lines.append(f"福彩本店出票{fmt_num(fucai - (dyj or 0))}元，本店收入{fmt_num((fucai - (dyj or 0)) * 0.08)}元")
         if ticai is not None:
-            result_lines.append(f"体彩本店出票{fmt_num(ticai - qdd or 0)}元，本店收入{fmt_num((ticai - qdd or 0) * 0.08)}元")
+            result_lines.append(f"体彩本店出票{fmt_num(ticai - (qdd or 0))}元，本店收入{fmt_num((ticai - (qdd or 0)) * 0.08)}元")
         if ggl is not None:
             result_lines.append(f"刮刮乐收入{fmt_num(ggl - ggl_kouyong)}元")
         if fucai is not None or ticai is not None or ggl is not None:
