@@ -110,10 +110,10 @@ def main():
         # 输出合买信息
         if has_h and fen is not None and price is not None:
             if total_hemai != 0:
-                hemai_line = f"合买{fmt_num(fen)}份{fmt_num(total_hemai)}元，扣佣后{fmt_num(total_hemai_kouyong)}元"
+                second_line = f"\n合买{fmt_num(fen)}份{fmt_num(total_hemai)}元，扣佣后{fmt_num(total_hemai_kouyong)}元"
             if amount_hit is not None and amount_hit != 0:
-                hemai_line += f"。【共付{fmt_num(adjusted_won)}元】"
-            result_lines.append(hemai_line)
+                second_line += f"。【共付{fmt_num(adjusted_won)}元】"
+            #result_lines.append(hemai_line)
         
         # 输出最后的结算结果
         if amount_hit is not None or amount_won is not None:
