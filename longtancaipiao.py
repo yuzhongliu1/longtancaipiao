@@ -94,7 +94,7 @@ def main():
                 second_line += f"，昨日我应付{fmt_num(abs(leftover))}元"
                 if fen is None or price is None:
                     second_line += f"。【共付{fmt_num(adjusted_won)}元】"
-            result_lines.append(second_line)
+            #result_lines.append(second_line)
             if amount_hit is None and leftover and leftover > 0:
                 result_lines.insert(0, f"{prefix}昨日我应收{fmt_num(leftover)}元")
             
@@ -113,7 +113,7 @@ def main():
                 second_line += f"\n合买{fmt_num(fen)}份{fmt_num(total_hemai)}元，扣佣后{fmt_num(total_hemai_kouyong)}元"
             if amount_hit is not None and amount_hit != 0:
                 second_line += f"。【共付{fmt_num(adjusted_won)}元】"
-            #result_lines.append(hemai_line)
+            result_lines.append(second_line)
         
         # 输出最后的结算结果
         if amount_hit is not None or amount_won is not None:
