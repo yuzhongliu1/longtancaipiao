@@ -220,9 +220,13 @@ def main():
         st.subheader("模式4：营业额模式")
         fucai = st.number_input("福彩出票金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
         ticai = st.number_input("体彩出票金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
-        qdd = st.number_input("钱多多出票金额", min_value=0.0, value=None, step=1.0, placeholder="选填")
+        qdd = st.number_input("钱多多出票金额", min_value=0.0, value=None, step=1.0, placeholder="选填") 
         dyj = st.number_input("大赢家出票金额", min_value=0.0, value=None, step=1.0, placeholder="选填")
         ggl = st.number_input("刮刮乐金额", min_value=0.0, value=None, step=1.0, placeholder="选填")
+        if qdd is None:
+            qdd = 0
+        if dyj is None:
+            dyj = 0
         total = (fucai or 0) + (ticai or 0) + (ggl or 0)
         total_bendian = max((fucai or 0) + (ticai or 0) - (qdd or 0) - (dyj or 0) + ggl, 0)
         fucai_kouyong = fucai * 0.92 if fucai is not None else 0
