@@ -218,9 +218,9 @@ def main():
 
     elif mode == "4":
         st.subheader("模式4：无模式")
-        fucai = st.number_input("福彩出票金额", min_value=0.0, value=None, step=1.0, placeholder="请输入") or 0
-        ticai = st.number_input("体彩出票金额", min_value=0.0, value=None, step=1.0, placeholder="请输入") or 0
-        ggl = st.number_input("刮刮乐金额", min_value=0.0, value=None, step=1.0, placeholder="请输入") or 0
+        fucai = st.number_input("福彩出票金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
+        ticai = st.number_input("体彩出票金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
+        ggl = st.number_input("刮刮乐金额", min_value=0.0, value=None, step=1.0, placeholder="请输入")
         total = (fucai if fucai is not None else 0) + (ticai if ticai is not None else 0) + (ggl if ggl is not None else 0)
         fucai_kouyong = fucai * 0.93 if fucai is not None else 0
         ticai_kouyong = ticai * 0.93 if ticai is not None else 0
