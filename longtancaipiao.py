@@ -9,24 +9,6 @@ def fmt_num(n):
         return str(int(n))
     return f"{n:.2f}".rstrip('0').rstrip('.')
 
-def init_session():
-    defaults = {
-        "mode": "1",
-        "amount_hit": None,
-        "amount_won": None,
-        "leftover": None,
-        "leftover_choice": "我收0元",
-        "has_h": False,
-        "fen": None,
-        "price": None,
-        "include_date": True
-    }
-    for k, v in defaults.items():
-        if k not in st.session_state:
-            st.session_state[k] = v
-
-init_session()
-
 def main():
     # 设置网页标题和图标
     st.set_page_config(page_title="🧮 彩票结算工具", page_icon="🧮")
@@ -52,8 +34,8 @@ def main():
         st.subheader("模式1：钱多多模式")
     
         # 输入区：出票金额、中奖金额、昨日剩余金额
-        amount_hit = st.number_input("今日出票金额", min_value=0.0, value=st.session_state.amount_hit, step=1.0, key="amount_hit", placeholder="请输入")
-        amount_won = st.number_input("今日中奖金额", min_value=0.0, value=st.session_state.amount_won, step=1.0, key="amount_won", placeholder="请输入")
+        amount_hit = st.number_input("今日出票金额", min_value=0.0, value=None, step=1.0, key="amount_hit", placeholder="请输入")
+        amount_won = st.number_input("今日中奖金额", min_value=0.0, value=None, step=1.0, key="amount_won", placeholder="请输入")
         leftover = st.number_input("昨日剩余", min_value=0.0, value=None, step=1.0, placeholder="选填")
         
         # 处理“昨日剩余”的收/付方向
